@@ -40,7 +40,13 @@
 <!-- Page content-->
 <div class="container">
     <div class="text-center mt-5">
-        <p>Added Student to Course </p>
+        <h1>Register Student to Course</h1>
+        <form action="student/registerToCourse/{id}" method="post" th:object="${course}">
+        <select th:field="*{course}">
+            <option th:each="i: ${courses}" th:value="${i.cName}" th:text="${i.cName}"></option>
+        </select>
+            <input type="submit" value="submit" class="btn btn-primary"/>
+            </form>
     </div>
 </div>
 <!-- Bootstrap core JS-->
