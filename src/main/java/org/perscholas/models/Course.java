@@ -3,12 +3,14 @@ package org.perscholas.models;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.List;
 
 
 //Lombok
@@ -34,8 +36,20 @@ public class Course implements Serializable {
 
     //fields
     @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     Long cId;
 
+    @Column(name= "name")
+    @Size(min= 3, max= 50, message= "Must be between 3 and 50 characters")
+    String cName;
+
+    @Column(name= "instructor", length = 50)
+    @Size(min= 3, max= 50, message= "Must be between 3 and 50 characters")
+    String cInstructorName;
+
+    @ManyToMany(mappedBy = "sCourses")
+    @ToString.Exclude
+    List<Student> cStudents;
 
 
 }
