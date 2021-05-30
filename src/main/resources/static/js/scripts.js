@@ -5,3 +5,11 @@
 */
 // This file is intentionally blank
 // Use this file to add JavaScript to your project
+
+window.onload = function(){
+    $(".courseregister").hide();
+};
+
+$('#showCourseForm').on('click', function(){
+    $('.courseregister').toggle();
+});

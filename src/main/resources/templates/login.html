@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+    <head>
+        <div th:replace="fragments/head :: myHead"></div>
+    </head>
+    <body>
+        <div th:replace="fragments/header :: myHeader"></div>
+        <!-- Page content-->
+        <div class="container">
+            <div class="mt-5">
+                <h1>Login page</h1>
+                <div class="container" id="login">
+                    <div class="errors">
+                        <span th:if="${logininfosRequired != null}" class="error" th:text="${logininfosRequired}"></span>
+                        <span th:if="${emailNotFound != null}" class="error" th:text="${emailNotFound}"></span>
+                        <span th:if="${LoginError != null}" class="error" th:text="${LoginError}"></span>
+                    </div>
+                    <form th:action="@{/login}" method="post" th:object="${logininfos}">
+                        <label class="form-label" for="email">Email</label>
+                        <input th:class="${#fields.hasErrors('email')}? 'form-control is-invalid':form-control" type="email" id="email" th:field="*{email}">
+                        <label class="form-label" for="passw">Password</label>
+                        <input th:class="${#fields.hasErrors('password')}? 'form-control is-invalid':form-control" type="password" id="passw" th:field="*{password}">
+                        <input class="btn btn-primary" type="submit" id="submit" name="submit" value="Login">
+                    </form>
+
+                </div>
+                <div class="container">
+                    <p>dont have an account yet ? <a href="/student/register"> click to register </a></p>
+                    <p>forgot password ?</p>
+                </div>
+            </div>
+        </div>
+        <div th:replace="fragments/footer :: myFooter"></div>
+    </body>
+</html>

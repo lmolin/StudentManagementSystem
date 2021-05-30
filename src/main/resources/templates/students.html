@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+  <head>
+    <div th:replace="fragments/head :: myHead"></div>
+  </head>
+  <body>
+    <div th:replace="fragments/header :: myHeader"></div>
+    <!-- Page content-->
+    <div class="container">
+      <div class="mt-5">
+        <h1>Display all students</h1>
+        <button type="button" class="btn btn-outline-primary btn-large" id="showCourseForm">Add student</button>
+        <div class="container">
+          <table class="table table-dark">
+            <thead>
+              <tr>
+                <th> Id </th>
+                <th> Email </th>
+                <th> Name </th>
+                <th> Role </th>
+                <th> Courses </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="student : ${students}">
+                <td><span th:text="${student.sId}"> Id </span></td>
+                <td><span th:text="${student.sEmail}"> Email </span></td>
+                <td><span th:text="${student.sName}"> Name </span></td>
+                <td><span th:text="${student.sRole}"> Role </span></td>
+                <td>
+                  <ul th:each="course : ${student.sCourses}">
+                    <li th:value="${course.cName}" th:text="${course.cName}"></li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="courseregister">
+        <h3>Register student</h3>
+        <div class="errors">
+          <span th:if="${error != null}" class="error" th:text="${error}"></span>
+        </div>
+        <form th:action="@{/admin/registerstudenttocourse}" method="post" th:object="${student}">
+          <label class="form-label">select student</label>
+          <select class="form-select" th:field="*{sId}">
+            <option th:each="student : ${students}" th:value="${student.sId}" th:text="${student.sName}"></option>
+          </select>
+          <br>
+          <label class="form-label">select course</label>
+          <div>
+            <input type="checkbox" name="sCourses"
+                   th:each="course : ${courses}"
+                   th:text="${course.cName}"
+                   th:value="${course.cId}"
+                   th:field="*{sCourses}"
+            /><br>
+          </div>
+          <input type="submit" value="submit" class="btn btn-primary"/>
+        </form>
+      </div>
+    </div>
+    <div th:replace="fragments/footer :: myFooter"></div>
+    <script>
+          window.onload = function(){
+    $(".courseregister").hide();
+};
+
+$('#showCourseForm').on('click', function(){
+    $('.courseregister').toggle();
+});
+      </script>
+  </body>
+</html>
