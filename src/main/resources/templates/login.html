@@ -12,15 +12,13 @@
                 <h1>Login page</h1>
                 <div class="container" id="login">
                     <div class="errors">
-                        <span th:if="${logininfosRequired != null}" class="error" th:text="${logininfosRequired}"></span>
-                        <span th:if="${emailNotFound != null}" class="error" th:text="${emailNotFound}"></span>
-                        <span th:if="${LoginError != null}" class="error" th:text="${LoginError}"></span>
+                       <p class="error" th:if="${param.error}"> Login and password are incorrect</p>
                     </div>
-                    <form th:action="@{/login}" method="post" th:object="${logininfos}">
+                    <form th:action="@{/login/authenticate}" method="post" >
                         <label class="form-label" for="email">Email</label>
-                        <input th:class="${#fields.hasErrors('email')}? 'form-control is-invalid':form-control" type="email" id="email" th:field="*{email}">
+                        <input th:class="${#fields.hasErrors('email')}? 'form-control is-invalid':form-control" type="email" id="email" name="email"  >
                         <label class="form-label" for="passw">Password</label>
-                        <input th:class="${#fields.hasErrors('password')}? 'form-control is-invalid':form-control" type="password" id="passw" th:field="*{password}">
+                        <input th:class="${#fields.hasErrors('password')}? 'form-control is-invalid':form-control" type="password" id="passw" name="password">
                         <input class="btn btn-primary" type="submit" id="submit" name="submit" value="Login">
                     </form>
 

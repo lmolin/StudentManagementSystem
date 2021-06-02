@@ -49,15 +49,15 @@ public class Student implements Serializable {
     @Size(min= 3, max= 50, message= "Must be between 3 and 50 characters")
     String sName;
 
-    @Column(name = "password", length = 50)
+    @Column(name = "password")
     @NotNull
     @NotBlank
-    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$", message = "- at least 8 characters\n- must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number\n- Can contain special characters")
+    //@Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$", message = "- at least 8 characters\n- must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number\n- Can contain special characters")
     String sPassword;
 
     @Column(name = "role")
     @NotNull
-    Role sRole;
+    String sRole;
 
     @ManyToMany
     @JoinTable(name= "studentcourse",

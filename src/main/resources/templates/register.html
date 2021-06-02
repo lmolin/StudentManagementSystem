@@ -17,11 +17,19 @@
             <input th:class="${#fields.hasErrors('sEmail')}? 'form-control is-invalid':form-control" type="email" id="sEmail" th:field="*{sEmail}"/>
             <label class="form-label"  for="sPassword">Enter Password:</label>
             <input th:class="${#fields.hasErrors('sPassword')}? 'form-control is-invalid':form-control" type="password" id = "sPassword" th:field="*{sPassword}"/>
-            <label class="form-label"  for="sPassword">Enter role:</label>
-            <select class="form-select"  th:field="*{sRole}"  id="sRole">
-                <option th:each="role : ${T(org.perscholas.enums.Role).values()}"
-                        th:value="${role}" th:text="${role}"></option>
-            </select>
+            <label class="form-label"  for="sPassword">Select the roles:</label>
+<!--            <select class="form-select"  th:field="*{sRole}"  id="sRole">-->
+<!--                <option th:each="role : ${T(org.perscholas.enums.Role).values()}"-->
+<!--                        th:value="${role}" th:text="${role}"></option>-->
+<!--            </select>-->
+            <div>
+                <input type="checkbox" name="sRole"
+                       th:each="role : ${T(org.perscholas.enums.Role).values()}"
+                       th:text="${role}"
+                       th:value="${role}"
+                       th:field="*{sRole}"
+                /><br>
+            </div>
             <input type="submit" value="submit" class="btn btn-primary"/>
         </form>
     </div>

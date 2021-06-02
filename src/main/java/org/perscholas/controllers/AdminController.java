@@ -74,8 +74,9 @@ public class AdminController {
         }
 
         Student student = studentService.getStudentById(id);
+        student.getSCourses().forEach(courses::add);
         student.setSCourses(courses);
         studentService.saveStudent(student);
-        return "redirect:admin/getallstudents";
+        return "redirect:../admin/getallstudents";
     }
 }

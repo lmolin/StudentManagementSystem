@@ -22,8 +22,7 @@ public class LoginInfos {
     String email;
     @NotNull @NotBlank(message = "this field is required")
     String password;
-    Role role;
-    boolean isAuth;
+    String role;
 
 
 }

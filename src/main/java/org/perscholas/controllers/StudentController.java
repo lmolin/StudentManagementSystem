@@ -55,7 +55,7 @@ public class StudentController {
 
         model.addAttribute("student", student);
         sService.saveStudent(student);
-        return "confirm";
+        return "redirect:../student/registertocourse/"+student.getSId();
     }
 
 
@@ -76,6 +76,7 @@ public class StudentController {
                                           Model model) {
 
         Student student = sService.getStudentById(id);
+        student.getSCourses().forEach(courses::add);
         student.setSCourses(courses);
         sService.saveStudent(student);
         return "confirm";

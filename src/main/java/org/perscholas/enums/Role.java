@@ -5,6 +5,7 @@ package org.perscholas.enums;
  * @created 28/05/2021
  */
 public enum Role {
-    USER,
-    ADMIN
+    ROLE_STUDENT,
+    ROLE_ADMIN,
+    WRITE
 }

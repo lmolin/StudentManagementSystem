@@ -4,13 +4,18 @@ import org.perscholas.dao.ICourseRepo;
 import org.perscholas.dao.IStudentRepo;
 import org.perscholas.models.Course;
 import org.perscholas.models.Student;
+import org.perscholas.security.AppSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -27,11 +32,13 @@ public class StudentService {
     @Autowired
     ICourseRepo cRepo;
 
+
+
     public List<Student> getAllStudents() {
         return repo.findAll();
     }
 
-    public Student findByEmail(String email) {
+    public Optional<Student> findByEmail(String email) {
         return repo.findBysEmail(email);
     }
 
@@ -40,6 +47,8 @@ public class StudentService {
     }
 
     public Student saveStudent(Student s) {
+
+        s.setSPassword(AppSecurityConfig.getPasswordEncoder().encode(s.getSPassword()));
         return repo.save(s);
     }
 
