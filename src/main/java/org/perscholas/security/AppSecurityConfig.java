@@ -72,10 +72,10 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
          */
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/admin/**").hasAnyAuthority(Role.ROLE_ADMIN.toString())
-                .antMatchers("/student/**").hasAuthority(Role.ROLE_STUDENT.toString())
                 .antMatchers("/").permitAll()
                 .antMatchers("/student/register").permitAll()
+                .antMatchers("/admin/**").hasAnyAuthority(Role.ROLE_ADMIN.toString())
+                .antMatchers("/student/**").hasAuthority(Role.ROLE_STUDENT.toString())
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").usernameParameter("email").passwordParameter("password")
