@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+  <head>
+    <div th:replace="fragments/head :: myHead"></div>
+  </head>
+  <body>
+    <div th:replace="fragments/header :: myHeader"></div>
+    <!-- Page content-->
+    <div class="container">
+      <div class="mt-5">
+        <h1>Display all courses</h1>
+        <button type="button" class="btn btn-outline-primary btn-large" id="showCourseForm">Add course</button>
+        <div class="container">
+          <table class="table table-dark">
+            <thead>
+              <tr>
+                <th> Id </th>
+                <th> Name </th>
+                <th> Instructor </th>
+              </tr>
+            </thead>
+            <tbody>
+<!--              <tr th:if="${courses == null && courses.empty}">-->
+<!--                <td colspan="3"> No courses Available </td>-->
+              </tr>
+              <tr th:each="course : ${courses}">
+                <td><span th:text="${course.cId}"> Id </span></td>
+                <td><span th:text="${course.cName}"> Name </span></td>
+                <td><span th:text="${course.cInstructorName}"> Instructor </span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="courseregister">
+        <h3>Register course</h3>
+        <form th:action="@{/course/register}" method="post" th:object="${course}">
+          <label class="form-label" for="cName">Course Name:</label>
+          <input th:class="${#fields.hasErrors('cName')}? 'form-control is-invalid':form-control" type="text" id="cName" th:field="*{cName}"/>
+          <label class="form-label"  for="cInstructorName">Instructor Name</label>
+          <input th:class="${#fields.hasErrors('cInstructorName')}? 'form-control is-invalid':form-control" type="text" id="cInstructorName" th:field="*{cInstructorName}"/>
+          <input type="submit" value="submit" class="btn btn-primary"/>
+        </form>
+      </div>
+    </div>
+    <div th:replace="fragments/footer :: myFooter"></div>
+      <script>
+          window.onload = function(){
+    $(".courseregister").hide();
+};
+
+$('#showCourseForm').on('click', function(){
+    $('.courseregister').toggle();
+});
+      </script>
+  </body>
+</html>

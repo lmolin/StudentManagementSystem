@@ -5,11 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
+import org.perscholas.enums.Role;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 //lombok
@@ -47,17 +49,21 @@ public class Student implements Serializable {
     @Size(min= 3, max= 50, message= "Must be between 3 and 50 characters")
     String sName;
 
-    @Column(name = "password", length = 50)
+    @Column(name = "password")
     @NotNull
     @NotBlank
-    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$", message = "- at least 8 characters\n- must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number\n- Can contain special characters")
+    //@Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$", message = "- at least 8 characters\n- must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number\n- Can contain special characters")
     String sPassword;
+
+    @Column(name = "role")
+    @NotNull
+    String sRole;
 
     @ManyToMany
     @JoinTable(name= "studentcourse",
             joinColumns = @JoinColumn(name = "sId"),
             inverseJoinColumns = @JoinColumn(name = "cId"))
     @ToString.Exclude
-    List<Course> sCourses;
+    List<Course> sCourses = new ArrayList<>();
 
 }

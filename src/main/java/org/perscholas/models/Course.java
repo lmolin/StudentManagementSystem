@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -49,7 +50,7 @@ public class Course implements Serializable {
 
     @ManyToMany(mappedBy = "sCourses")
     @ToString.Exclude
-    List<Student> cStudents;
+    List<Student> cStudents = new ArrayList<>();
 
 
 }
